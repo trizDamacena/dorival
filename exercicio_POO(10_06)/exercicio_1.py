@@ -23,32 +23,52 @@ class ItemBiblioteca:
             print( f"Livro: {self.titulo}\nAno de publicação: {self.ano_publicacao}\nDisponivel: Não\n")
     
 
-livro1 = ItemBiblioteca("Percy Jackson", 2006, True)
+pj_1 = ItemBiblioteca("Percy Jackson", 2006, True)
 
-livro1.obter_info()
+#pj_1.obter_info()
 
-livro1.emprestar()
+#pj_1.emprestar()
 
-livro1.obter_info()
+#pj_1.obter_info()
 
-livro1.devolver()
+#pj_1.devolver()
 
-livro1.obter_info()
+#pj_1.obter_info()
 
 
 class ColecaoLivro(ItemBiblioteca):
-    def __init__(self, titulo, ano_publicacao, disponivel, lista_livros):
+    def __init__(self, titulo, ano_publicacao, disponivel):
         super().__init__(titulo, ano_publicacao, disponivel)
-        lista_livros = []
+        self.lista_livros = []
 
     def adicionar_livro(self, livro:ItemBiblioteca):
         self.lista_livros.append(livro)
     
     def verificar_disponibilidade_colecao(self):
+
         for livro in self.lista_livros:
             if not livro.disponivel:
-                print("A coleção não está disponivel")
+                print(f"A coleção não está disponível")
+                return False
+        print("A coleção está disponivel")
+        return True
+    
+    def obter_info(self):
+        for livro in self.lista_livros:
+            if not livro.disponivel:
+                print(f"\nNome: {self.titulo}\nAno: {self.ano_publicacao}\nDisponivel: Não")
             else:
-                print("Coleção disponivel")
+                print(f"\nNome: {self.titulo}\nAno: {self.ano_publicacao}\nDisponivel: Sim")
+        
 
-colecao_PJ = ColecaoLivro(ItemBiblioteca)
+pj_2 = ItemBiblioteca("Percy Jackson e o Mar de Monstro", 2006, True)
+pj_3 = ItemBiblioteca("Percy Jakcson e a Maldição do Titãn",2007, False )
+
+Percy_Jackson = ColecaoLivro("Percy Jackson e os Olimpianos", 2009, True)
+
+Percy_Jackson.adicionar_livro(pj_1)
+Percy_Jackson.adicionar_livro(pj_2)
+Percy_Jackson.adicionar_livro(pj_3)
+Percy_Jackson.verificar_disponibilidade_colecao()
+
+Percy_Jackson.obter_info()
